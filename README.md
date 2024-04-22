@@ -43,9 +43,9 @@
 
 ## ScreenShot
 
-![Captura de pantalla completa](/images/ss_fulls.jpg)
+![Captura de pantalla completa](images/ss_fulls.jpg)
 
-![Captura de pantalla responsive en iPhone 14](/images/ss_responsive_iphone14.jpg)
+![Captura de pantalla responsive en iPhone 14](images/ss_responsive_iphone14.jpg)
 
 
 
@@ -53,7 +53,7 @@
 
 *Este proyecto está en constante desarrollo y mejora.*
 
-=======
+
 # tallermk-2.0-DjangoAndMysSql
 Actualmente se encuentra en producción
 Puedes verlo en - https://www.garajeloshermanos.cl
