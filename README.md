@@ -13,7 +13,7 @@
 - **¿Quiénes Somos?:**
   - Listado de mecánicos registrados.
   - Detalles de cada mecánico con imagen.
-  - Búsqueda de mecánicos por nombre.
+  
 
 - **Formulario de Contacto:**
   - Formulario de contacto para clientes (reclamos, sugerencias).
@@ -25,6 +25,7 @@
 
 - **Accesibilidad:**
   - Implementación del sistema ARIA para personas con discapacidad visual.
+  - Responsividad, Seguridad y escalabilidad.
 
 - **Diseño:**
   - Diseñado por Williams Diaz.
@@ -54,6 +55,6 @@
 *Este proyecto está en constante desarrollo y mejora.*
 
 
-# tallermk-2.0-DjangoAndMysSql
+# Tallermk-2.0-DjangoAndMysSql
 Actualmente se encuentra en producción
 Puedes verlo en - https://www.garajeloshermanos.cl
