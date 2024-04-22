@@ -1,0 +1,35 @@
+{% extends 'base.html ' %}
+{% load static %}
+{% block contenido %}
+
+
+<main> <!--Main-->
+  {% load crispy_forms_tags %}
+    
+
+    <div class="container mt-5" >
+        <div class="text-center">
+            <h3 style="margin-top: 150px;">Modificar Mecanico:</h3>
+        </div>
+        
+        <form id="formModMec" style="margin-top: 80px;" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form | crispy}} 
+
+
+            
+            <button type="submit" class="btn btn-primary" aria-label="Agregar Mencanico">Modificar</button>
+            <button type="reset" class="btn btn-primary" aria-label="Limpiar Formulario">Limpiar</button>
+
+
+        </form>
+        {{mensaje}}
+    </div>
+                                                  
+     
+</main>
+{% block js %}
+    <script src="{}"></script>
+{% endblock %}
+{%endblock%}
+

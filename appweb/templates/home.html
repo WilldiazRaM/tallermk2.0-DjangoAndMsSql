@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+<head>
+  
+  <link rel="stylesheet" type="text/css" href="{%static 'homeStyle.css'%}">
+  
+<meta name="google-site-verification" content="JXrlzJ-pzwh2YRKKl-7vUjopxUl9zOay-tfnRhQjTxU" />
+</head>
+<body>
+<main>
+
+
+
+<!-- Carrusel de Publicidades -->
+<div class="container-fluid">
+    <div class="">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="9000" role="region" aria-label="Carrusel de imagenes con publicidad del taller. Esta va cambiando cada nueve segundos."> <!-- Se ajusta el intervalo a 9 segundos -->
+            <div class="carousel-inner">
+                {% for publicidad in publicidades %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img class="d-block w-100 h-50 carousel-img" src="{{ publicidad.imagen.url }}" alt="{{ publicidad.descripcion }}" aria-describedby="descripcionPublicidad">
+                        <div class="carousel-caption">
+                            <!-- Agregar sello de agua en la esquina inferior derecha -->
+                            <img class="watermark" src="{% static 'images/logoTallerHermanos.jpg' %}" alt="Watermark">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Card Responsiva para la Descripción -->
+    <div class="row mt-4">
+        <div class="col-md-6 offset-md-3">
+            <div class="card" style="opacity: 0.8; margin-bottom: 10px; margin-top: 0px; text-align: center;">
+                <div class="card-body">
+                    <h2 class="card-title">Más sobre...</h2>
+                    <div class="card-body">
+                    <h1 class="card-text" id="descripcionPublicidad" style="font-family: 'Quicksand', sans-serif; color: #333; font-size: medium;">
+                        {{ publicidades.0.descripcion }}
+                    </h1>
+<div class="container">
+    <a href="{% url 'reservas' %}" rel="canonical" class="btn btn-primary btn-reserva" aria-label="Reserva tu cita Ahora">
+        Reserva tu cita Ahora <i class="fa-solid fa-computer-mouse fa-bounce" style="color: #ce3603;"></i>
+    </a>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <style>
+        /* Estilos para la card del Carrusel de Publicidades */
+        .card {
+            opacity: 0.8;
+        }
+
+        /* Estilos para las imágenes del Carrusel de Publicidades */
+        #carouselExampleControls img {
+            max-height: 800px; /* Ajusta el valor según tus necesidades */
+            width: auto; /* Esto asegura que el ancho se ajuste automáticamente para mantener la proporción */
+            margin: 0 auto; /* Centra la imagen horizontalmente */
+        }
+
+        .watermark {
+            position: absolute;
+            bottom: 5%;
+            right: 5%;
+            max-width: 100px;
+            max-height: 100px;
+            opacity: 0.25;
+            border-radius: 50%;
+            border: 2px solid gold; /* Borde dorado */
+            z-index: 999; /* Asegura que esté en la parte superior */
+        }
+
+        .btn-reserva {
+            border: 2px solid gold; /* Gold border */
+            transition: transform 0.3s ease; /* Smooth transition effect */
+        }
+
+        .btn-reserva:hover {
+            transform: scale(1.1); /* Scale effect on hover */
+        }
+    </style>
+
+
+<script>
+    // Actualiza la descripción al cambiar de foto en el carrusel
+    $('#carouselExampleControls').on('slid.bs.carousel', function () {
+        var descripcionActual = $('.carousel-item.active img').attr('alt');
+        $('#descripcionPublicidad').text(descripcionActual);
+    });
+</script>
+
+
+</main>
+</body>
+  {% endblock %}

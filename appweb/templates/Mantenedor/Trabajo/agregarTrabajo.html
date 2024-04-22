@@ -1,0 +1,41 @@
+{% extends 'base.html ' %}
+{% load static %}
+{% block contenido %}
+
+
+<main> <!--Main-->
+  {% load crispy_forms_tags %}
+    
+
+  <div class="container mt-5">
+    <div class="text-center">
+        <h3 style="margin-top: 150px;">Agregar Trabajo:</h3>
+    </div>
+    <p class="mt-4">Para agregar un trabajo complete los campos del Formulario</p>
+    <p>Los formularios marcados con * son obligatorios</p>
+    <form id="formAddTrabajo" style="margin-top: 80px;" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.titulo | as_crispy_field }}
+        {{ form.descripcion | as_crispy_field }}
+        {{ form.mecanico | as_crispy_field }}
+        {{ form.categoria | as_crispy_field }}
+        {{ form.imagenes | as_crispy_field}}
+        
+        {% if not user.is_authenticated or user.groups.all.0.name != 'mecanico' %}
+            {{ form.autorizado | as_crispy_field }}
+        {% endif %}
+        
+        <input type="reset" value="Cancelar" class="btn btn-danger">
+        <button type="submit" class="btn btn-primary" aria-label="Agregar Mecanico">Agregar</button>
+        
+    </form>
+    {{ mensaje }}
+</div>
+                                                  
+     
+</main>
+{% block js %}
+    <script src="{}"></script>
+{% endblock %}
+{%endblock%}
+

@@ -1,0 +1,36 @@
+# Archivos generados automáticamente
+*.pyc
+__pycache__
+
+# Directorio de entorno virtual
+venv/
+env/
+
+# Archivo de configuración local
+local_settings.py
+
+# Archivos de registro
+*.log
+
+# Archivos de respaldo y caché
+*.bak
+*.swp
+*.sql
+*.sqlite3
+
+# Carpeta de medios (si se usa)
+media/
+
+# Carpeta de archivos estáticos compilados (si se usa)
+staticfiles/
+
+# Carpeta de archivos de compilación (si se usa)
+build/
+
+# Carpeta con fotos del taller mecánico
+archivos/
+
+# Carpetas adicionales que no deben ser incluidas
+node_modules/
+.vscode/
+tmp/

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+<main>
+<body>
+ <!-- Columna de Datos del Cliente / Despacho -->
+ {% load crispy_forms_tags %}
+
+<!-- Dentro de tu plantilla ingresarDatosCliente.html -->
+<div class=>
+    <div class="container">
+        <div class="row">
+            <div class="p-3 mb-2 bg-dark text-white">
+                <div class="card" style="opacity: 0.8;">
+                    <div class="card-body">
+                        <h2 id="datosclienteForm">Completa el forlulario para realizar la compra </h2>
+                        <form id="formularioCliente" action="{% url 'ingresar_datos_cliente' %}" method="POST" novalidate>
+                            <br>
+                            {% csrf_token %}
+                            <input type="hidden" name="carrito" value="{% if carrito_json %}{{ carrito_json }}{% endif %}">
+                            {{ form.metodo_entrega|as_crispy_field }}
+                            {{ form.nombre|as_crispy_field }}
+                            {{ form.telefono|as_crispy_field }}
+                            {{ form.email|as_crispy_field }}
+                            {{ form.comuna|as_crispy_field }}
+                            {{ form.direccion|as_crispy_field }}
+                        
+                            <button type="submit" class="btn btn-primary btn-block mt-3" name="submit_cliente">Continuar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</main>
+{% endblock %}

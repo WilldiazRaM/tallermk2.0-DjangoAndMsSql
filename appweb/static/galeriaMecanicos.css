@@ -1,0 +1,6 @@
+.taller-text {
+    font-weight: bold;
+    color: black;
+    transition: color 0.3s; /* Agrega transición para el efecto hover */
+  }
+  

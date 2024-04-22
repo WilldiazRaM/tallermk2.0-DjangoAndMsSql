@@ -1,0 +1,263 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+  
+  
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Garajelosherrmanos.cl Taller Mecánico Puente Alto{% endblock %}</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
+    integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/logoTallerICO.ico' %}" >
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" href="{% static 'baseStyle.css' %}">
+<meta name="google-site-verification" content="JXrlzJ-pzwh2YRKKl-7vUjopxUl9zOay-tfnRhQjTxU" />
+</head>
+
+  <style>
+    .dropdown-item:hover {
+        text-decoration: underline;
+        color: hsl(51, 83%, 36%); /* Color dorado */
+    }
+    
+    main {
+      background-color: #0833a2;
+    }
+    .whatsapp-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .whatsapp-icon i {
+    color: #17b814;
+    font-size: 5x;
+  }
+</style>
+  <header>
+    <!-- Menu de navegacion -->
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="border: 2px solid #ffd700;" role="navigation" aria-label="Menú de Navegación">
+      
+      
+      <div class="container-fluid">
+        <!-- Logo a la izquierda -->
+        <a class="navbar-brand" href="#">
+           
+        </a>
+    
+        <!-- Botón para navegación en dispositivos móviles -->
+        <button class="navbar-toggler" type="button" style="border: 2px solid #ffd700;" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <!-- Menú de navegación a la derecha -->
+        <div class="collapse navbar-collapse" id="navbarNav" >
+          
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              
+              <a class="nav-link" id="home-but" href="{% url 'home' %}" rel="canonical"><button type="button" class="btn btn-outline-info"><i class="fa-solid fa-house-chimney fa-fade fa-lg" style="color: #efebeb; margin-right: 5px;"></i>Inicio<span class="sr-only">(current)</span></button> </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Nuestros Servicios
+              
+              </a>
+              
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border: 2px solid #ffd700; background-color: whitesmoke;">
+                <ul>
+                <li><a rel="canonical" class="dropdown-item" href="{% url 'pintura_automotriz' %}" style="font-weight: bold; font-size: 1.1em;">Pintura Automotriz</a></li>
+                <li><a rel="canonical" class="dropdown-item" href="{% url 'restauracion' %}" style="font-weight: bold; font-size: 1.1em;">Restauración de vehículos</a></li>
+                <li><a rel="canonical" class="dropdown-item" href="{% url 'mecanica_motos' %}" style="font-weight: bold; font-size: 1.1em;">Mecánica de Motos</a></li>
+                <li><a rel="canonical" class="dropdown-item" href="{% url 'mecanica_autos' %}" style="font-weight: bold; font-size: 1.1em;">Mecánica Automotriz</a></li>
+                </ul>
+                </div>
+              
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'galeriaMecanicos' %}" rel="canonical"><i class="fa-regular fa-images fa-fade fa-lg" style="color: #efebeb; margin-right: 5px;"></i>¿Quienes Somos?</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contacto' %}" rel="canonical"><i class="fa-regular fa-address-book fa-fade fa-lg" style="color: #efebeb; margin-right: 5px;"></i>Contacto</a>
+            </li>
+           
+            
+          </ul>
+        </div>          
+        
+        <div class="ml-auto">
+
+          <a class="nav-link" id="home-but" href="{% url 'reservas' %}" rel="canonical">
+            
+            <button type="button" class="btn btn-outline-warning">
+              <i class="fa-solid fa-arrow-right fa-beat-fade fa-xl" style="color: #f51000; margin-right: 5px;"></i>Agenda tu Hora!
+            </button>
+          </a>
+        </div>
+        
+      
+    </nav>
+</header>
+{% block contenido %} 
+
+<body>     
+<main> <!--Main-->
+
+  <!-- CARRUSEL DE TRABAJOS-->
+
+      
+
+
+
+
+{% endblock %}  
+<a href="https://wa.me/56997157382?text=Garaje%20los%20Hermanos.%20Garant%C3%ADa%20es%20confianza." aria-label="Abrir WhatsApp" class="whatsapp-icon">
+  <i class="fa-brands fa-whatsapp fa-beat fa-5x"></i>
+</a>
+</main>
+</body> 
+
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="container-fluid">
+  <!-- Footer -->
+  <footer>
+         
+    <!-- Section: Social media -->
+    <section 
+             class="d-flex justify-content-between p-4 bg-dark text-white "
+             style="border: 2px solid #ffd700;"
+             >
+      <!-- Left -->
+      <div class="me-5">
+        <span>Conéctate con nosotros en las redes Sociales</span>
+      </div>
+      <!-- Left -->
+
+      <!-- Right -->
+      <div>
+        <a href="https://www.tiktok.com/@garaje.los.hermanos?_t=8ivzvsptSjt&_r=1" class="text-white me-4">
+          <i class="fa-brands fa-tiktok fa-shake fa-lg" style="color: hwb(0 100% 0%);"></i>
+        </a>
+        <a href="https://wa.me/56997157382?text=Garaje%20los%20Hermanos.%20Garant%C3%ADa%20es%20confianza." class="text-white me-4" class="whatsapp-icon">
+          <i class="fa-brands fa-whatsapp fa-beat fa-lg" style="color: rgb(29, 128, 28);"></i>
+        
+          <a href="https://www.instagram.com/garaje_los_hermanos/" aria-label="Visita nuestro perfil en Instagram" class="text-white me-4">
+          <i class="fa-brands fa-instagram fa-shake fa-lg" style="color: #884d99;"></i>
+        </a>        
+        
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold">Garaje los Hermanos</h6>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #7c4dff; height: 2px"
+                />
+            <p><i class="fa-solid fa-quote-right fa-bounce fa-sm"></i>
+              Somos un negocio familiar ubicado en Puente Alto. Todos nuestros trabajos cuentan con garantía. ¡Gracias por confiar en nosotros para el cuidado de tu vehículo!
+              <i class="fa-solid fa-quote-right fa-bounce fa-sm"></i>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Servicios</h6>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #7c4dff; height: 2px">              
+                
+                
+              <p>
+              <a href="{% url 'pintura_automotriz' %}" class="text-dark">Pintura Automotriz</a>
+            </p>
+            <p>
+              <a href="{% url 'restauracion' %}" class="text-dark">Restauración</a>
+            </p>
+            <p>
+              <a href="{% url 'mecanica_motos' %}" class="text-dark">Mecanica de Motos</a>
+            </p>
+            <p>
+              <a href="{% url 'mecanica_autos' %}" class="text-dark">Mecanica de Autos</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Contacto</h6>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #7c4dff; height: 2px"
+                />
+            <p><i class="fas fa-home mr-3"></i> Pedro Lagos 0269, Puente Alto</p>
+            <i class="fas fa-envelope mr-3"></i><a href="mailto:contacto@garajeloshermanos.cl">contacto@garajeloshermanos.cl</a>
+            <p><i class="fas fa-phone mr-3"></i> + 56 9 32538583</p>
+            
+          </div>
+          <!-- Grid column -->
+        </div>
+      </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <a href="https://github.com/WilldiazRaM" aria-label="Enlace a perfil de GitHub del Desarrollador" target="_blank" rel="noopener noreferrer">
+      <i class="fa-brands fa-github fa-2xl" aria-hidden="true"></i>
+    </a>
+    With &#10084;&#65039;
+    <em>STG, CL 2024®</em>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</div>
+<!-- End of .container -->  
+  
+
+
+  
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+  crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/1dfe34419e.js" crossorigin="anonymous"></script>
+  
+   
+ 
+</html>

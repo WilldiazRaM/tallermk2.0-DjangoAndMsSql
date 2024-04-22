@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+{% load crispy_forms_tags %}
+
+<main>
+  <div class="container mt-5">
+    <table class="table table-success table-striped" style="margin-top: 150px; margin-left: 13px; margin-right: 80px;">
+      <thead>
+        <h1>Detalles de Trabajo</h1> 
+        <tr>
+          <th scope="col">Título</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Mecánico</th>
+          <th scope="col">Categoría</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        {% for trabajo in trabajos %}
+          {% if trabajo.titulo == titulo %}
+            <tr>
+              <td>{{ trabajo.titulo }}</td>
+              <td>{{ trabajo.descripcion }}</td>
+              <td>{{ trabajo.mecanico.nombre }} {{ trabajo.mecanico.apellido }}</td>
+              <td>{{ trabajo.categoria }}</td>
+              
+            </tr>
+            
+          {% endif %}
+        
+      </tbody>
+    </table>
+    <div class="container">
+      <div class="row">
+    <img src="{{ trabajo.imagenes.url }}" alt="Imagen del trabajo">
+  </div>
+  </div>
+</div>
+   {% endfor %}
+</main>
+
+{% endblock %}

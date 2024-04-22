@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+{% load crispy_forms_tags %}
+
+
+<main>
+  <script>
+    function autorizarTrabajo(pk) {
+      Swal.fire({
+        title: "Advertencia",
+        text: "¿Deseas autorizar este Trabajo? \n Al autorizar este trabajo. Se publicara en la Pagina web.",
+        icon: "question",
+        showCancelButton: true,
+        cancelButtonText: "No, cancelar",
+        confirmButtonText: "Si, autorizar"
+      }).then(function(result) {
+        if (result.isConfirmed) {
+          window.location.href = "/Mantenedor/Trabajo/autorizar/" + pk + "/";        
+        } else {
+          return false;
+        }
+      });
+    };
+
+    function rechazarTrabajo(pk) {
+      Swal.fire({
+        title: "Advertencia",
+        text: "¿Deseas rechazar este Trabajo? \n Al rechazar este trabajo. No se publicara en la Pagina web.",
+        icon: "question",
+        showCancelButton: true,
+        cancelButtonText: "No, cancelar",
+        confirmButtonText: "Si, rechazar"
+      }).then(function(result) {
+        if (result.isConfirmed) {
+          window.location.href = "/Mantenedor/Trabajo/rechazar/" + pk + "/";        
+        } else {
+          return false;
+        }
+      });
+    };
+  </script>
+
+<div class="container mt 5">
+<table class="table table-success table-striped" style="margin-top: 150px; margin-left: 50px; margin-right: 80px;">
+   
+  <thead>
+    <h1>Listado de Trabajos:</h1> 
+        <tr>
+            <th scope="col">Título</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Mecánico</th>
+            <th scope="col">Categoría</th>
+            <th scope="col">Autorizar Publicación</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for trabajo in trabajos %}
+      <tr>
+        <td>{{ trabajo.titulo }}</td>
+        <td>{{ trabajo.descripcion }}</td>
+        <td>{{ trabajo.mecanico }}</td>
+        <td>{{ trabajo.categoria }}</td>
+        <td>
+          {% if not trabajo.autorizado %}
+          <button class="btn btn-primary btn-sm" onclick="autorizarTrabajo('{{ trabajo.pk }}')">Autorizar</button>
+          {% else %}
+          <button class="btn btn-danger btn-sm" onclick="rechazarTrabajo('{{ trabajo.pk }}')" >Rechazar</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+    </table>
+  </div>
+
+
+  {{mensaje}}
+
+
+   
+
+
+
+
+</main>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+
+
+{% if messages %}
+{% for m in messages %}    
+
+  <script>
+    Swal.fire({
+      'title': 'Enviado!',
+      'text': '{{ mensaje }}',
+      'icon': 'success'  
+    });
+  </script>
+  
+  {% endfor %}
+{% endif %}  
+<style>
+  .form-text {
+            color: white;
+        }
+
+  
+        .form-text {
+            background: linear-gradient(90deg, #d52b1e 33%, white 33%, white 67%, #0033a0 67%);
+            background-size: 300% 100%;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradient 5s infinite linear;
+        }
+    
+        @keyframes gradient {
+            0% {
+                background-position: 100% 0;
+            }
+    
+            100% {
+                background-position: -100% 0;
+            }
+        }
+</style>
+<body>
+<main> <!--Main-->
+  {% load crispy_forms_tags %}
+    <div class="container" >
+        <div class="row">
+          <div class="col">
+          <div class="card bg-dark text-white">
+                     
+              <div class="p-3 mb-2 bg-dark text-white">         
+                              
+                         <h4>Formulario de Contacto <i class="fa-solid fa-align-left fa-xs"></i></h4></div>                      
+                          <br>
+                          <br>
+                          <br>
+                          <div class="card-body">
+                          <form id="formularioContacto" action="" method="post" novalidate role="form">
+
+                            {% csrf_token %}
+                            {{ form | crispy}}                            
+                            
+                          <div class="col">
+                                                        
+                            <button type="submit" class="btn btn-primary" aria-label="Enviar Formulario" aria-live="polite">Enviar</button>
+                                                                                                             
+          
+                                
+                          </div>         
+                            
+                                
+                          </form>
+                        </div>
+                        </div>
+                          
+                      </div>
+                  </div>
+                
+                </div>
+            
+             
+              <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>      
+</main>
+</body>
+{% block js %}
+    <script src=""></script>
+{% endblock %}
+{%endblock%}
+

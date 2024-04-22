@@ -1,0 +1,48 @@
+{% extends 'base.html ' %}
+{% load static %}
+{% block contenido %}
+
+{% if messages %}
+{% for m in messages %}    
+  <script>
+    Swal.fire({
+      'title': 'Mecanico Agregado',
+      'text': '{{m}}',
+      'icon': 'success'
+    })
+
+  </script>
+  {% endfor %}
+{% endif %}  
+
+
+
+
+<main> <!--Main-->
+  {% load crispy_forms_tags %}
+    
+
+    <div class="container mt-5" >
+        
+        <h2 class="mt-4">Agregar Mecanico:</h2>
+        <form id="formAddMecanico" style="margin-top: 80px; margin-left: 5%; margin-right: 6%;" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form | crispy}} 
+
+
+            <input type="reset" value="Cancelar" class="btn btn-danger">
+            <button type="submit" class="btn btn-primary" aria-label="Agregar Mencanico" >Agregar</button>
+            
+
+           
+        </form>
+        {{ mensaje }}
+    </div>
+                                                  
+     
+</main>
+{% block js %}
+
+{% endblock %}
+{%endblock%}
+

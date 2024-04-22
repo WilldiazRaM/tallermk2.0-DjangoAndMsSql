@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+
+<main>  
+  
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for moto in motos %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img class="d-block w-100" src="{{ moto.imagen.url }}" alt="{{ moto.descripcion }}">
+                    <div class="carousel-caption">
+                        <!-- Agregar sello de agua en la esquina inferior derecha -->
+                        <img class="watermark" src="{% static 'images/logoTallerHermanos.jpg' %}" alt="Watermark">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!-- Card Responsiva para la Descripción -->
+    <div class="row mt-4">
+        <div class="col-md-6 offset-md-3">
+            <div class="card" style="opacity: 0.8; margin-bottom: 10px; margin-top: 0px; text-align: center;">
+                <div class="card-body">
+                    <h2 class="card-title">Más sobre...</h2>
+                    <div class="card-body">
+                        <h1 class="card-text" id="descripcionMotos" style="font-family: 'Quicksand', sans-serif; color: #333; font-size: medium;">
+                            {{ motos.0.descripcion }}
+                        </h1>
+                        <div class="container">
+                            <a href="{% url 'reservas' %}" class="btn btn-primary btn-reserva" aria-label="Reserva tu cita Ahora">
+                                Reserva tu cita Ahora  <i class="fa-solid fa-computer-mouse fa-bounce" style="color: #ce3603;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<style>
+    .watermark {
+        position: absolute;
+        bottom: 5%;
+        right: 5%;
+        max-width: 100px;
+        max-height: 100px;
+        opacity: 0.2;
+        border-radius: 50%;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $('#carouselExampleControls').on('slid.bs.carousel', function () {
+            var descripcionActual = $('.carousel-item.active img').attr('alt');
+            $('#descripcionMotos').text(descripcionActual);
+        });
+    });
+</script>
+
+{% endblock %}

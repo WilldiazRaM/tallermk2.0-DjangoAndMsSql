@@ -1,0 +1,36 @@
+{% extends 'base.html ' %}
+{% load static %}
+{% block contenido %}
+
+
+
+<main> <!--Main-->
+  {% load crispy_forms_tags %}
+    
+
+    <div class="container mt-5" style="margin-top: 150px;" >
+        
+        <h2 class="mt-4">Envia tu Curriculum</h2>
+        <p> Rellena el siguiente formulario para postular. </p>
+        <p style="color:red"> Campos con * son Obligatorios</p>
+        <form id="formAddCurriculum" style="margin-top: 100px; margin-left: 10%; margin-right: 10%;" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form | crispy}} 
+
+
+            <input type="reset" value="Cancelar" class="btn btn-danger">
+            <button type="submit" class="btn btn-primary" aria-label="Agregar Mencanico" >Enviar</button>
+            
+
+           
+        </form>
+        {{ mensaje }}
+    </div>
+                                                  
+     
+</main>
+{% block js %}
+
+{% endblock %}
+{%endblock%}
+

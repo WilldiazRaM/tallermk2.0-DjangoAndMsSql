@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+
+{% if messages %}
+{% for m in messages %}    
+<script>
+    Swal.fire({
+      'title': 'Hora agendada correctamente',
+      'text': 'Se ha enviado un correo de confirmación',
+      'icon': 'success'  
+    });
+</script>
+{% endfor %}
+{% endif %}  
+
+<main>
+    <div class="container">
+        <div class="card border-primary"> <!-- Agrega la clase border-primary para un borde azul -->
+            <img src="{% static 'images/logoTallerHermanos.jpg' %}" alt="Logo Taller Hermanos" style="border-radius: 50%; width: 190px; height: 190px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto; border: 3px solid gold;">
+            <div class="card-body">
+                {% if reserva %}
+                <div class="card">
+                    <div class="reservation-details">
+                        <h4><strong>Datos de Reserva:</strong></h4>
+                        <p><strong>Hora:</strong> {{ reserva.hora|time:"H:i" }}</p>
+                        <p><strong>Fecha:</strong> {{ reserva.fecha|date:"d/m/Y" }}</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Nombre:</strong> {{ reserva.nombre_cliente }}</p>
+                        <p class="card-text"><strong>Apellido:</strong> {{ reserva.apellido_cliente }}</p>
+                        <p class="card-text"><strong>Correo Electrónico:</strong> {{ reserva.correo_usuario }}</p>
+                        <p class="card-text"><strong>Teléfono de Contacto:</strong> {{ reserva.telefono_cliente }}</p>
+                        <p class="card-text"><strong>Tipo de Vehículo:</strong> {{ reserva.tipo_vehiculo }}</p>
+                        <p class="card-text"><strong>Marca del Vehículo:</strong> {{ reserva.marca_vehiculo }}</p>
+                        <p class="card-text"><strong>Modelo del Vehículo:</strong> {{ reserva.modelo_vehiculo }}</p>
+                        <p class="card-text"><strong>Información Adicional:</strong> {{ reserva.informacion_adicional }}</p>
+                        <p class="card-text">
+                            <em>Se ha enviado una copia al Correo Electrónico: {{ reserva.correo_usuario }}</em>
+                        </p>
+                        <h6>Gracias por elegirnos</h6>
+                    </div>
+                </div>
+                {% else %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Error en la confirmación</h5>
+                        <p class="card-text">Hubo un error al procesar la reserva.</p>
+                    </div>
+                </div>
+                {% endif %}
+                <a href="{% url 'home' %}">
+                    <button type="button" class="btn btn-primary">Volver al Inicio</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

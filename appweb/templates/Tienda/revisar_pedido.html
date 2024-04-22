@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Confirma los datos - Garaje los Hermanos{% endblock %}
+{% load static %}
+{% block contenido %}
+
+<main>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card" style="margin-top: 20px;">
+          <div class="card-header">
+            <h1 class="mb-0">Detalles del Pedido y Entrega</h1>
+          </div>
+          <div class="card-body">
+            <h2>Productos:</h2>
+            <ul class="list-group">
+              {% for producto in productos_en_carrito %}
+                <li class="list-group-item">
+                  <strong>{{ producto.nombre }}</strong><br>
+                  Precio: ${{ producto.precio }} - Cantidad: {{ producto.cantidad }}
+                </li>
+              {% endfor %}
+            </ul>
+            
+            <h2 class="mt-4">Información de Entrega y Contacto</h2>
+            <p><strong>Nombre:</strong> {{ cliente_data.nombre }}</p>
+            <p><strong>Teléfono:</strong> {{ cliente_data.telefono }}</p>
+            <p><strong>Email:</strong> {{ cliente_data.email }}</p>
+
+ 
+          
+          <!-- Asegúrate de utilizar total_compra en lugar de total -->
+          <h2 class="mt-4">Total: ${{ total_compra }}</h2>
+          
+
+
+
+
+            <h6> Debugear: 
+              {% if cliente_data.metodo_entrega and 'retiro_local' in cliente_data.metodo_entrega %}
+    <p style="font-size: 21px;">Dirección:  <br><strong><em>Cliente Retira en Taller</em></strong></p>
+{% else %}
+    <p><strong>Dirección de entrega:</strong> {{ cliente_data.direccion }}</p>
+{% endif %}
+
+
+
+            </h6>
+
+            <div class="text-center mt-4">
+              <a href="{% url 'procesar_pago' %}" class="btn btn-primary">Ir a Pagar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col text-center">
+        <img src="{% static 'transbank_logo.png' %}" alt="Transbank Logo" class="img-fluid">
+        <p class="mt-3">Confíe en nosotros, utilizamos Transbank para asegurar sus transacciones.</p>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

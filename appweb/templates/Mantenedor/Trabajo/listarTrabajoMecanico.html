@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+{% load crispy_forms_tags %}
+
+<main>
+  
+  <div class="container mt 5">
+    <div class="text center">
+        <h3></h3>
+    </div>
+    <br>
+ 
+<table class="table table-success table-striped" style="margin-top: 150px; margin-left: 50px; margin-right: 80px;">
+   
+  <thead>
+    <h1>Listado de Trabajos:</h1> 
+        <tr>
+            <th scope="col">Título</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Mecánico</th>
+            <th scope="col">Categoría</th>
+            <th scope="col">Estado de Publicación</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for trabajo in trabajos %}
+      <tr>
+        <td>{{ trabajo.titulo }}</td>
+        <td>{{ trabajo.descripcion }}</td>
+        <td>{{ trabajo.mecanico }}</td>
+        <td>{{ trabajo.categoria }}</td>
+        <td>
+            {% if trabajo.autorizado %}
+            <button class="btn btn-success btn-sm" type="button">Trabajo publicado</button>
+            {% else %}
+            <button class="btn btn-danger btn-sm" type="button">Trabajo rechazado</button>
+            {% endif %}
+          </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+    </table>
+  </div>
+
+  {{mensaje}}
+
+
+   
+
+
+
+
+</main>
+
+
+
+
+{% endblock %}

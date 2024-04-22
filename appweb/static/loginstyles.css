@@ -1,0 +1,47 @@
+/* HOJA CONECTADA CORRECTAMENTE */
+#formularioContacto {
+    margin-top: 25px;
+    
+}
+/* */
+h4 {
+    margin-top: 250px;
+    margin-left: 150px;;
+    margin-right: 200px;
+    margin-bottom: 60px;
+    align-items: center;
+    
+}
+
+
+/* Bordes formularios*/
+/*#logincliente {
+    margin-top: 30px;
+    margin-left: 150px;
+    margin-right: 200px;
+    margin-bottom: 200px;
+} */
+
+#loginadmin {
+    margin-top: 30px;
+    margin-left: 150px;
+    margin-right: 200px;
+    margin-bottom: 200px;
+}
+
+#loginmecanicos {
+    margin-top: 30px;
+    margin-left: 150px;
+    margin-right: 200px;
+    margin-bottom: 200px;
+}
+
+#newUser{
+    margin-top: 30px;
+    margin-left: 150px;
+    margin-right: 200px;
+    margin-bottom: 200px;
+}
+/* --------------------------*/
+
+

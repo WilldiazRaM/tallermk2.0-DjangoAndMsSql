@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+{% if messages %}
+{% for m in messages %}
+<script>
+    Swal.fire({
+      'title': 'Agregado Correctamente',
+      'text': 'Producto(s) Agregado Correctamente al carro.',
+      'icon': 'success'  
+    });
+  </script>
+{% endfor %}
+{% endif %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const currentPage = document.body.getAttribute("data-page");
+        const images = document.querySelectorAll(".zoomable-image");
+
+        if (currentPage === "productos") {
+            images.forEach(function (image) {
+                image.addEventListener("mousemove", function (e) {
+                    const boundingRect = image.getBoundingClientRect();
+                    const mouseX = e.clientX - boundingRect.left;
+                    const mouseY = e.clientY - boundingRect.top;
+
+                    const percentX = mouseX / boundingRect.width * 100;
+                    const percentY = mouseY / boundingRect.height * 100;
+
+                    image.style.transformOrigin = percentX + "% " + percentY + "%";
+                });
+            });
+
+            // Escuchar clics en elementos del dropdown
+            const dropdownContainer = document.getElementById("filtroCarrito");
+            const dropdownItems = dropdownContainer.querySelectorAll(".dropdown-item");
+
+            if (dropdownItems.length > 0) {
+                dropdownItems.forEach(function (item) {
+                    item.addEventListener("click", function (e) {
+                        e.preventDefault();
+
+                        // Obtener la categoría seleccionada
+                        const categoriaSeleccionada = item.getAttribute("data-categoria");
+
+                        // Filtrar los productos en base a la categoría seleccionada
+                        filterProducts(categoriaSeleccionada);
+                    });
+                });
+            }
+        }
+
+        // Función para filtrar productos
+        function filterProducts(categoriaSeleccionada) {
+            // Mostrar u ocultar productos según la categoría
+            const productos = document.querySelectorAll("#productos-container .card.bg-success.text-white");
+
+            productos.forEach(function (producto) {
+                const categoriaProducto = producto.getAttribute("data-categoria");
+
+                if (categoriaSeleccionada === "Todos los productos" || categoriaProducto === categoriaSeleccionada) {
+                    producto.style.display = "block";
+                } else {
+                    producto.style.display = "none";
+                }
+            });
+        }
+    });
+</script>
+
+
+
+<style>
+    .zoomable-image {
+        transition: transform 0.2s;
+    }
+
+    .zoomable-image:hover {
+        transform: scale(1.1);
+    }
+
+    /* Estilo para el encabezado h1 */
+    h1 {
+        font-family: 'Arial', sans-serif; /* Cambia la fuente según tus preferencias */
+        color: #ffffff; /* Color blanco para el texto */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Sombra suave para resaltar el texto */
+        transition: color 0.3s; /* Efecto de transición de color al hacer hover */
+    }
+
+    h1:hover {
+        color: #ffd700; /* Cambia el color al hacer hover */
+    }
+
+    /* Estilo para el encabezado h2 */
+    h2 {
+        font-family: 'Verdana', sans-serif; /* Cambia la fuente según tus preferencias */
+        color: #ffffff; /* Color blanco para el texto */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Sombra suave para resaltar el texto */
+        transition: color 0.3s; /* Efecto de transición de color al hacer hover */
+    }
+
+    h2:hover {
+        color: #ffd700; /* Cambia el color al hacer hover */
+    }
+
+</style>
+
+<body data-page="productos">
+    <main>
+        <div class="container">
+            <div class="row">
+                <!-- Columna izquierda para mostrar los productos -->
+                <div class="col-md-8">
+                    <h1>Tienda en linea Garaje los Hermanos</h1>
+                    <h2>Garaje los Hermanos Taller, Puente Alto</h2>
+                    
+                    <div class="card bg-success text-white" id="productos-container" style="border: 1px solid #ffd700; margin-top: 30px;">
+                        <div class="dropdown" id="filtrar">
+
+                            <!--BOTON PARA BUSCAR POR NOMBRE LOS PRODUCTOS-->
+                            <form method="get" action="{% url 'listar_productos' %}">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="q"
+                                        placeholder="Busca Producto por nombre..."
+                                        aria-label="Busca Producto por nombre..." aria-describedby="basic-addon2"
+                                        value="{{ query }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="submit">Buscar</button>
+                                    </div>  
+                                </div>
+                            </form>
+                            
+                            
+
+                        </div>
+
+                        <div class="row">
+
+                            {% for producto in productos %}
+                            <div class="col-md-4 mb-4">
+                                <!-- Contenido de la tarjeta del producto -->
+                                <div class="card bg-dark text-white" data-categoria="{{ producto.categoria.nombre }}" style="border: ridge 2px #ffd700;">
+                                    {% if producto.imagen_producto %}
+                                    <img class="card-img-top img-thumbnail zoomable-image"
+                                        src="{{ producto.imagen_producto.url }}" alt="Imagen de {{ producto.nombre }}">
+                                    {% else %}
+                                    <!-- Puedes usar una imagen por defecto si no hay imagen para el producto -->
+                                    <img class="card-img-top img-thumbnail zoomable-image"
+                                        src="{% static 'images/logoTallerHermanos.jpg' %}"
+                                        alt="Imagen de producto por defecto">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <!-- Información del producto -->
+                                        <p class="card-title"><strong> Nombre:</strong> {{ producto.nombre }}</p>
+                                        <p class="card-text"><strong> Marca: </strong> {{ producto.marca.nombre }}</p>
+                                        <p class="card-text"><strong> Precio: </strong> ${{ producto.precio }}</p>
+
+                                        <!-- Botón "Agregar al carro" -->
+                                        <!-- Formulario para agregar al carro -->
+                                        <!-- Formulario para agregar al carro con cantidad -->
+                                        <form method="post" action="{% url 'agregar_al_carro' producto.id %}">
+                                            {% csrf_token %}
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Agregar al Carrito
+                                                    </button>
+                                                    <div id="mensaje-exito_{{ producto.id }}" style="display: none;"></div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna derecha para mostrar el carrito de compras -->
+                <div class="col-md-4">
+                    <!-- Contenido del carrito de compras -->
+                    <div class="card" style="margin-top: 30px;">
+                        <img class="card-img-top" src="{% static 'images/logoTallerHermanos.jpg' %}"
+                            alt="Card image cap" style="border: 4px solid #ffd700; border-radius: 50%;">
+                        <div class="card-body">
+
+                            <!-- Aquí puedes agregar contenido relacionado con el carrito de compras -->
+                            <img src="{% static 'images/gif/storeOPEN.gif' %}" alt="Store GIF"
+                                style="width: 100%; height: auto; border: solid 2px grey">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+
+
+
+
+</body>
+
+
+{% endblock %}

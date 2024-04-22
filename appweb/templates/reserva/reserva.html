@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+{% if messages %}
+{% for m in messages %} 
+
+{% if mensaje %}
+<script>
+    Swal.fire({
+      'title': 'Enviado!',
+      'text': '{{ mensaje }}',
+      'icon': 'success'  
+    });
+</script>
+{% endif %}
+
+    {% endfor %}
+    {% endif %}  
+
+
+    <style>
+        /* Estilo personalizado para ocultar los controles del video */
+        video {
+            outline: none;
+            /* Quita el contorno predeterminado al hacer clic en el video en algunos navegadores */
+            pointer-events: none;
+        }
+    
+        /* Contenedor para el video con altura fija para evitar que se expanda según el tamaño del video */
+        .video-container {
+            height: 300px;
+            /* Puedes ajustar la altura según tus necesidades */
+            overflow: hidden;
+        }
+    
+        .form-text {
+            background: linear-gradient(90deg, #d52b1e 33%, white 33%, white 67%, #0033a0 67%);
+            background-size: 300% 100%;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradient 5s infinite linear;
+        }
+    
+        @keyframes gradient {
+            0% {
+                background-position: 100% 0;
+            }
+    
+            100% {
+                background-position: -100% 0;
+            }
+        }
+    
+        form {
+            color: white;
+            font-size: 18px;
+        }
+    
+        .horario {
+            background: linear-gradient(90deg, #d52b1e 33%, white 33%, white 67%, #0033a0 67%);
+            background-size: 300% 100%;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradient 5s infinite linear;
+        }
+    
+        @keyframes gradient {
+            0% {
+                background-position: 100% 0;
+            }
+    
+            100% {
+                background-position: -100% 0;
+            }
+        }
+    </style>
+
+    
+        <main>
+            
+            {% load crispy_forms_tags %}
+            <div class="container">
+                <div class="row">
+                    <!-- Columna izquierda para el formulario -->
+                    <div class="col-md-6">
+                        <div class="col">
+                            <div class="p-3 mb-2 bg-dark text-white">                          
+                                <h1 class="text-center mb-4">Formulario de Reservas</h1>
+                                <p class="horario"><strong>Horario:</strong> <br> Lunes a Viernes: 9am hasta 6pm <br> Sabados: 9.30am hasta 3pm <br> <i class="fa-regular fa-calendar-days fa-shake fa-lg" style="color: #FFD43B;"></i> </p>
+                                <br>
+                                <div class="card-body">
+                                    <form id="formularioReserva" action="{% url 'reservas' %}" method="post" novalidate>
+                                        {% csrf_token %}
+                                        {{ form | crispy }}
+                                        <button type="submit" class="btn btn-primary btn-block" aria-label="Enviar Formulario">Enviar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna derecha para el calendario y video -->
+                    <div class="col-md-6">
+                        <div class="container">
+    <!-- Imagen -->
+    <img src="{% static 'flyyer-reserva.jpeg' %}" alt="Flyer de reserva" width="100%" aria-label="Imagen de publicidad sobre Promocion mes marzo, 20% de descuento.">
+</div>
+
+
+
+                            <!-- Calendario -->
+                            <div id="container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    
+{% endblock %}

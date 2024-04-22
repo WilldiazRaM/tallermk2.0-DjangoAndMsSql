@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+{% if cliente_form.errors %}
+{% for field, errors in cliente_form.errors.items %}
+ 
+
+
+{% for error in errors %}
+
+  {% endfor %}
+{% endfor %}
+{% endif %}
+
+
+
+<style>
+    
+
+
+</style>
+
+<body>
+    <main>
+        {% load crispy_forms_tags %}
+        <div class="container">
+            <div class="row">
+                <!-- Columna del carrito -->
+                <div class="col-md-12 col-lg-6 mb-4">
+                    <div class="card" style="opacity: 0.8;">
+                        <div class="card-body">
+                            <img class="card-img-top rounded-circle" src="{% static 'images/logoTallerHermanos.jpg' %}" alt="LOGO TALLER GARAJE LOS HERMANOS"
+                                style="width: 190px; height: 190px; margin-top: 20px; border: 4px solid #ffd700;">
+                            <h2 style="text-align: center;">Mi carrito <i class="fa-solid fa-cart-arrow-down fa-sm"></i></h2>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for producto in productos_en_carrito %}
+                                        <tr>
+                                            <td id="VerificarEste">{{ producto.nombre }}</td>
+                                            <td>${{ producto.precio }}</td>
+                                            <td>{{ producto.cantidad }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="1"></td>
+                                        <td><strong>Total: ${{ total|floatformat:0|default:""|add:""|join:"" }} CLP</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <form method="post" action="{% url 'limpiar_carrito' %}">
+                                {% csrf_token %}
+
+                                <div class="d-flex justify-content-between">
+                                    <a href="{% url 'ingresar_datos_cliente' %}" class="btn btn-primary btn-block mt-3" data-cantidad-productos="{{ cantidad_productos_en_carrito }}" onclick="return validarCarrito()">
+                                        Continuar (Total: ${{ total|floatformat:0|default:"0" }})
+                                    </a>
+                                    
+
+                                    <a href="{% url 'listar_productos' %}" class="btn btn-primary mt-2">
+                                        Agregar Productos <i class="fa-solid fa-plus fa-beat fa-lg" style="color: #c29722;"></i>
+                                    </a>
+
+                                    <button type="submit" class="btn btn-danger mt-2">
+                                        Limpiar <i class="fa-solid fa-x fa-beat fa-lg" style="color: grey;"></i>
+                                    </button>
+                                </div>
+                                <script>
+                                    // Función para mostrar Sweet Alert si no hay productos en el carrito
+                                    function mostrarMensajeSinProductos() {
+                                        Swal.fire({
+                                            title: 'Carrito Vacío',
+                                            text: 'Para continuar, agrega al menos un producto al carrito.',
+                                            icon: 'info',
+                                            confirmButtonText: 'Entendido',
+                                        });
+                                    }
+                                
+                                    // Función para validar si hay productos antes de continuar con la compra
+                                    function validarCarrito() {
+                                        // Obtén la cantidad de productos del atributo personalizado del botón
+                                        var cantidadProductos = document.querySelector('.btn.btn-primary.btn-block.mt-3').getAttribute('data-cantidad-productos');
+                                
+                                        if (cantidadProductos === "0") {
+                                            // Si la cantidad de productos en el carrito es cero, muestra el mensaje
+                                            mostrarMensajeSinProductos();
+                                            // Evita que se siga la acción predeterminada (por ejemplo, redirección)
+                                            return false;
+                                        }
+                                        // Si hay productos, permite que se siga la acción predeterminada
+                                        return true;
+                                    }
+                                </script>
+                                
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card" style="opacity: 0.8;">
+                    <div class="card-body">
+                        <h2>Información Adicional</h2>
+                        <p>
+                            Aquí puedes agregar cualquier información adicional que desees mostrar en la página, como detalles sobre los métodos de pago, políticas de devolución, etc.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+    </main>
+    
+   <script src="{% static 'js/maps.js' %}"></script> 
+</body>
+{% endblock %}
+
+

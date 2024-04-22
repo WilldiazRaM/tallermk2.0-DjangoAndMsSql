@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+{% load crispy_forms_tags %}
+
+<head>
+  <title>Detalle Postulante</title>
+  <link rel="stylesheet" href="{% static 'styleDetalleCV.css' %}">
+</head>
+<main>
+    <div class="card bg-success text-white" style="margin-top: 100px; margin-left: 10%; margin-right: 10%;">
+        <div class="card-header">
+          <h5 class="card-title">{{ curriculum.nombre }} {{ curriculum.apellido }}</h5>
+        </div>
+        <div class="card-body">
+          <div class="row" >
+            <div class="col-md-4">
+              {% if curriculum.foto %}
+              <img src="{{ curriculum.foto.url }}" class="img-thumbnail" alt="Foto">
+              {% endif %}
+            </div>
+            <div class="col-md-8">
+              <ul class="list-group">
+                <li class="list-group-item"><strong>Nombre:</strong> {{ curriculum.nombre }}</li>
+                <li class="list-group-item"><strong>Segundo Nombre:</strong> {{ curriculum.segundo_nombre }}</li>
+                <li class="list-group-item"><strong>Apellido:</strong> {{ curriculum.apellido }}</li>
+                <li class="list-group-item"><strong>Segundo Apellido:</strong> {{ curriculum.segundo_apellido }}</li>
+                <li class="list-group-item"><strong>Rut:</strong> {{ curriculum.rut }}</li>
+                <li class="list-group-item"><strong>Fecha de Nacimiento:</strong> {{ curriculum.fecha_nacimiento }}</li>
+                <li class="list-group-item"><strong>Número de Teléfono:</strong> {{ curriculum.numero_telefono }}</li>
+                <li class="list-group-item"><strong>Email:</strong> {{ curriculum.email }}</li>
+                <li class="list-group-item"><strong>Experiencia:</strong> {{ curriculum.experiencia }}</li>
+                <li class="list-group-item"><strong>Especialidad:</strong> {{ curriculum.especialidad }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+</main>
+{% endblock %}

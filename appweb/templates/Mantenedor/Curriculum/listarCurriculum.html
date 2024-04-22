@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+{% load crispy_forms_tags %}
+<script>
+  function eliminarCurriculum(pk) {
+    
+    Swal.fire({
+      'title': 'Advertencia',
+      'text': '¿Desea Eliminar esta Postulación?',
+      'icon': 'question',
+      'showCancelButton': true,
+      'cancelButtonText': 'No, cancelar.',
+      'confirmButtonText': 'Si, eliminar.'
+    }).then(function(result){
+      if(result.isConfirmed) {
+        window.location.href='/Mantenedor/Curriculum/eliminarPostulacion/'+pk+'/';
+                              
+      }
+    })
+  }
+</script>
+
+<main>
+  
+  <div class="container mt 5">
+    <div class="text center">
+        <h3></h3>
+    </div>
+    <br>
+    <br>
+    
+
+
+<table class="table table-success table-striped"  style="margin-top: 150px; margin-left:8px; margin-right:80px; margin-bottom: 65px;">
+    
+  <thead>
+    <h1>Ver postulaciones -Trabaja con nosotros-</h1>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Segundo Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Segundo Apellido</th>
+        <th scope="col">Rut</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for p in curriculums %}
+      <tr>
+        <th scope="row">{{p.nombre}}</th>
+        <td>{{p.segundo_nombre}}</td>
+        <td>{{p.apellido}}</td>
+        <td>{{ p.segundo_apellido }}</td>
+        <td> {{ p.rut }}</td>
+        <td>
+        <a href="{% url 'verPostulacion' p.pk %}" class="btn btn-info btn-sm">Ver Postulacion</a>
+        <a href="#" onclick="eliminarCurriculum('{{producto.id}}')" class="btn btn-danger btn-sm">Eliminar</a>
+      </td>
+      </tr>
+         {% endfor %}      
+    </tbody>
+  </table>
+</div>
+
+  {{mensaje}}
+</main>
+{% endblock %}

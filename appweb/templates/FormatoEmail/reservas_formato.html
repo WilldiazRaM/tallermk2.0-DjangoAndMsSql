@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Reserva</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        strong {
+            color: #000;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <h2>Confirmación de Reserva</h2>
+        
+        <p><strong>Nombre:</strong> {{ reserva.nombre_cliente }} {{ reserva.apellido_cliente }}</p>
+        <p><strong>Fecha de Reserva:</strong> {{ reserva.fecha|date:"d/m/Y" }}</p>
+        <p><strong>Hora de Reserva:</strong> {{ reserva.hora|time:"H:i" }}</p>
+        <p><strong>Correo Electrónico:</strong> {{ reserva.correo_usuario }}</p>
+        <p><strong>Teléfono de Contacto:</strong>{{ reserva.telefono_cliente }}</p> 
+        <p><strong>Tipo de Vehículo:</strong> {{ reserva.tipo_vehiculo }}</p>
+        <p><strong>Marca de Vehículo:</strong> {{ reserva.marca_vehiculo }}</p>
+        <p><strong>Modelo de Vehículo:</strong> {{ reserva.modelo_vehiculo }}</p>
+        <p><strong>Información Adicional:</strong> {{ reserva.informacion_adicional }}</p>
+
+        <div class="footer">
+            <p>
+                Para más información, visita nuestro sitio web:
+                <a href="http://www.garajeloshermanos.cl" target="_blank">www.garajeloshermanos.cl</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
