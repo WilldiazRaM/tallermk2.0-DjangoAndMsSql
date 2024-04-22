@@ -42,9 +42,9 @@
 - Williams Diaz
 
 ## ScreenShot
-
+  -  Version de Escritorio : 
 ![Captura de pantalla completa](images/ss_fulls.jpg)
-
+  -  Version responsive : 
 ![Captura de pantalla responsive en iPhone 14](images/ss_responsive_iphone14.jpg)
 
 
