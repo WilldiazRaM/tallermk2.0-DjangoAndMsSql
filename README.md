@@ -7,7 +7,7 @@
 - **Página de Inicio:**
   - Información del taller.
   - Carrusel con detalles de trabajos realizados para promocionar los servicios.
-  - Menú de navegación (barnav) con opciones como "¿Quiénes somos?", "Enviar Currículum", "Contacto" y "Reservas".
+  - Menú de navegación (barnav) con opciones como "¿Quiénes somos?", "Contacto" y "Reservas".
   - Formulario de Contacto.
 
 - **¿Quiénes Somos?:**
