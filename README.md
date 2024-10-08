@@ -32,7 +32,7 @@
   - En constante mejora.
 
 ## Uso
-- AppWeb en producción: https://www.garajeloshermanos.cl
+- AppWeb Django, Clona el repositorio y cambia la base de datos a SQlite para hacerlo correr de manera local.
 
 ## Contribuciones
 
