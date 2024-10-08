@@ -52,7 +52,7 @@
 
 
 
-*Este proyecto está en constante desarrollo y mejora.*
+
 
 
 # Tallermk-2.0-DjangoAndMysSql
